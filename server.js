@@ -44,12 +44,12 @@ app.get('/users/:direction', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
   const { id } = req.params;
-  Person.findById(id, (err, post) => {
+  Person.findById(id, (err, user) => {
     if (err) {
       res.status(500);
       res.json({ error: err });
     }
-    res.json(post);
+    res.json(user.friend);
   })
 })
 
