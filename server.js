@@ -14,7 +14,44 @@ const STATUS_USER_ERROR = 422;
 app.use(bodyParser.json());
 
 // Your API will be built out here.
+app.get('/users', (req, res) => {
+  Person.find({}, (err, users) => {
+    if (errr) {
+      res.status(500);
+      res.json({ error: err });
+    }
+    res.json(users);
+  })
+})
 
+app.get('/users/:direction', (req, res) => {
+  const { direction } = req.params;
+  if (direction = 'asc') {
+    const flow = -1;
+  } else {
+    const flow = 1;
+  }
+  Person.find({})
+    .sort({ firstName: flow })
+    .exec((err, users) => {
+    if (err) {
+      res.status(500);
+      res.json({ error: err });
+    }
+    res.json(users);
+  })
+})
+
+app.get('/users/:id', (req, res) => {
+  const { id } = req.params;
+  Person.findById(id, (err, post) => {
+    if (err) {
+      res.status(500);
+      res.json({ error: err });
+    }
+    res.json(post);
+  })
+})
 
 mongoose.Promise = global.Promise;
 const connect = mongoose.connect(
