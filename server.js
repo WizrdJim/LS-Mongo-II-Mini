@@ -49,7 +49,7 @@ app.get('/users/:id', (req, res) => {
       res.status(500);
       res.json({ error: err });
     }
-    res.json(user.friend);
+    res.json(user.friends);
   })
 })
 
